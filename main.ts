@@ -24,6 +24,10 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . . f f . . . f f f . . . 
         `)
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
+    music.beamUp.play()
+    mySprite.vy = -450
+})
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.setImage(img`
         . . . . . . . . . . . . . . . . 
@@ -43,6 +47,12 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
         . . f f f f f f f f f f . . . . 
         . . . f f f . . . f f . . . . . 
         `)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile2`, function (sprite, location) {
+    music.baDing.play()
+    info.changeScoreBy(1)
+    pause(100)
+    tiles.setTileAt(location, assets.tile`transparency16`)
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (mySprite.isHittingTile(CollisionDirection.Bottom)) {
@@ -194,6 +204,7 @@ mySprite = sprites.create(img`
 controller.moveSprite(mySprite, 100, 0)
 scene.cameraFollowSprite(mySprite)
 mySprite.setStayInScreen(true)
+info.startCountdown(10)
 forever(function () {
     mySprite.vy = mySprite.vy + 25
 })
