@@ -1,9 +1,6 @@
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile0`, function (sprite, location) {
     game.over(false)
 })
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
-    game.over(true)
-})
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.setImage(img`
         . . . . . . . . . . . . . . . . 
@@ -23,6 +20,9 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . f f f f f f f f f f . . 
         . . . . . f f . . . f f f . . . 
         `)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, location) {
+    game.over(true)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
     music.beamUp.play()
@@ -204,7 +204,7 @@ mySprite = sprites.create(img`
 controller.moveSprite(mySprite, 100, 0)
 scene.cameraFollowSprite(mySprite)
 mySprite.setStayInScreen(true)
-info.startCountdown(10)
+info.startCountdown(30)
 forever(function () {
     mySprite.vy = mySprite.vy + 25
 })
